@@ -361,7 +361,7 @@ class VagrantClient(object):
             )
 
         msg = "Failed to start the VM: See log file '{}'".format(self._get_stderr_log())
-        with io.open(self._get_stderr_log(), "r") as f:
+        with io.open(self._get_stderr_log(), "r", encoding="utf-8", errors='backslashreplace') as f:
             self.result["stderr"] = f.read()
         self._module.fail_json(msg=msg, **self.result)
 
